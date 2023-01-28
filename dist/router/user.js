@@ -1,18 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.router = void 0;
+exports.UserRouter = void 0;
 const express_1 = require("express");
 const errorHandler_1 = require("../middleware/errorHandler");
 const validationBody_1 = require("../middleware/validationBody");
 const user_1 = require("../controller/user");
-exports.router = (0, express_1.Router)();
-// @description: Create new data
-exports.router.post("/create", validationBody_1.validationBody.checkCreateToDo(), errorHandler_1.errorHandler.handleValidationError, user_1.CREATE_NEW_DATA);
-// @description: Get all data
-exports.router.get("/all", user_1.GET_ALL_DATA);
-// @description: Get one data
-exports.router.get("/:id", user_1.GET_ONE_DATA);
-// @description: Update one data
-exports.router.put("/:id", validationBody_1.validationBody.checkCreateToDo(), errorHandler_1.errorHandler.handleValidationError, user_1.UPDATE_ONE_DATA);
-// @description: Delete single data
-exports.router.delete("/:id", user_1.DELETE_ONE_DATA);
+exports.UserRouter = (0, express_1.Router)();
+exports.UserRouter.post("/create", validationBody_1.validationBody.data_id(), validationBody_1.validationBody.validate_email("email"), validationBody_1.validationBody.data_element("email"), validationBody_1.validationBody.data_element("password"), errorHandler_1.errorHandler.handleValidationError, user_1.CREATE_NEW_DATA);
+exports.UserRouter.post("/login", validationBody_1.validationBody.data_id(), validationBody_1.validationBody.data_element("email"), validationBody_1.validationBody.data_element("password"), errorHandler_1.errorHandler.handleValidationError, user_1.LOGIN_USER);
+exports.UserRouter.get("/all", user_1.GET_ALL_DATA);
+exports.UserRouter.get("/:id", user_1.GET_ONE_DATA);
+exports.UserRouter.put("/:id", validationBody_1.validationBody.data_element("email"), validationBody_1.validationBody.data_element("password"), errorHandler_1.errorHandler.handleValidationError, user_1.UPDATE_ONE_DATA);
+exports.UserRouter.delete("/:id", user_1.DELETE_ONE_DATA);

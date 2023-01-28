@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from "express";
 import { Post_Tables } from "../model/model";
-import { User_Tables } from "../model/model";
 const { Op } = require("sequelize");
 import { v4 as uuidtv4 } from 'uuid'
 

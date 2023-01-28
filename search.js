@@ -1,1 +1,0 @@
-// how to use  parseInt(req.query.pages - 1) * count in typescript?

@@ -7,6 +7,7 @@ import {
     DELETE_ONE_DATA,
     UPDATE_ONE_DATA,
     GET_ONE_DATA,
+    LOGIN_USER
 } from '../controller/user'
 export const UserRouter = Router();
 
@@ -18,6 +19,14 @@ UserRouter.post(
     validationBody.data_element("password"),
     errorHandler.handleValidationError,
     CREATE_NEW_DATA
+)
+UserRouter.post(
+    "/login",
+    validationBody.data_id(),
+    validationBody.data_element("email"),
+    validationBody.data_element("password"),
+    errorHandler.handleValidationError,
+    LOGIN_USER
 )
 UserRouter.get("/all", GET_ALL_DATA)
 UserRouter.get("/:id", GET_ONE_DATA)

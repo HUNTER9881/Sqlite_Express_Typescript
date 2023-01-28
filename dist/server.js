@@ -6,8 +6,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const database_sqlite_1 = __importDefault(require("./config/database.sqlite"));
 const user_1 = require("./router/user");
+const post_1 = require("./router/post");
 const port = 5000;
 const app = (0, express_1.default)();
+// Database connected
 database_sqlite_1.default.sync()
     .then(() => {
     console.log("Database is connected");
@@ -15,9 +17,13 @@ database_sqlite_1.default.sync()
     .catch((error) => {
     console.log("Database failed", error.message);
 });
+// Middleware
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));
-app.use("/", user_1.router);
+// Backend API
+app.use("/api/user", user_1.UserRouter);
+app.use("/api/post", post_1.PostRouter);
+// Server connected
 app.listen(port, () => {
     console.log("Server is connected");
 });

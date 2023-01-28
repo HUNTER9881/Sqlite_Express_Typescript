@@ -1,5 +1,8 @@
 import { DataTypes, Model } from "sequelize";
 import database from "../config/database.sqlite";
+import { pre } from '@typegoose/typegoose';
+import bcrypt from 'bcryptjs';
+
 
 interface UserTablesSchema {
     id: string,
@@ -12,6 +15,10 @@ interface PostTablesSchema {
     content: string,
     author: string,
 }
+
+
+
+
 
 class Post_Tables extends Model<PostTablesSchema> { }
 Post_Tables.init(
@@ -59,10 +66,9 @@ User_Tables.init(
     }
 );
 
-// User_Tables.hasMany(Post_Tables, {
-//     foreignKey: "author_id",
-//     as: "post"
-// })
+
+
+
 Post_Tables.belongsTo(User_Tables, {
     foreignKey: "author",
     as: "user"
